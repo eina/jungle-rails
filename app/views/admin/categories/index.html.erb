@@ -1,0 +1,30 @@
+<section class="admin-categories-index">
+  <header class="page-header">
+    <h1>Admin &raquo; All Categories</h1>
+
+    <%= link_to '+ New Product', [:new, :admin, :category], class: 'btn btn-lg btn-info' %>
+  </header>  
+
+  <div class="panel">
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Date Created</th>
+            <th>Date Updated</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @category.each do |cat|%>
+            <tr>
+              <td><%= cat.name %></td>          
+              <td><%= cat.created_at.to_date.to_s(:long)   %></td>         
+              <td><%= cat.updated_at.to_date.to_s(:long) %></td>          
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
