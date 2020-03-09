@@ -37,5 +37,20 @@ RSpec.describe User, type: :model do
 
       expect(user.password).to eql(user.password_confirmation)
     end
+
+    context 'Email Validation' do
+      before do
+        user1 = User.new(name: 'test', email: 'test@test.com', password: 'test', password_confirmation: 'test')
+        user1.save!
+        user2 = user1.dup
+        user2.save!  
+      end
+
+      it 'should be invalid if email is not unique' do   
+        should_not be_valid
+      end
+      
+    end
+
   end
 end
