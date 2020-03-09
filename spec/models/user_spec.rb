@@ -72,7 +72,7 @@ RSpec.describe User, type: :model do
     end
 
     it 'should be invalid if there is no email present' do
-      user = User.authenticate_with_credentials(nil, 'test')
+      user = User.authenticate_with_credentials('', 'test')
       expect(user).to be_nil
     end
 
@@ -83,6 +83,11 @@ RSpec.describe User, type: :model do
 
     it 'should login if there are spaces before and after email' do
       user = User.authenticate_with_credentials('       trial@trial.com               ', 'password')
+      expect(user).to_not be_nil
+    end
+
+    it 'should normalize an email with capitals and log in' do
+      user = User.authenticate_with_credentials('TRIAL@TRIAL.com', 'password')
       expect(user).to_not be_nil
     end
   end
