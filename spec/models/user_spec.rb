@@ -80,6 +80,11 @@ RSpec.describe User, type: :model do
       user = User.authenticate_with_credentials('test@test.com', nil)
       expect(user).to be_nil
     end
+
+    it 'should login if there are spaces before and after email' do
+      user = User.authenticate_with_credentials('       trial@trial.com               ', 'password')
+      expect(user).to_not be_nil
+    end
   end
 
 end
