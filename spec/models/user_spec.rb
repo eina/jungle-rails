@@ -8,6 +8,18 @@ RSpec.describe User, type: :model do
       expect(user).to be_valid
     end
 
+    it 'should be invalid without an email value' do
+      user = User.new(name: 'test', email: nil, password: 'password', password_confirmation: 'password')
+
+      expect(user).to_not be_valid
+    end
+
+    it 'should be invalid without a name value' do
+      user = User.new(name: nil, email: 'test@test.com', password: 'password', password_confirmation: 'password')
+
+      expect(user).to_not be_valid
+    end    
+
     it 'should be invalid without a password value' do
       user = User.new(name: 'test', email: 'test@test.com', password: nil, password_confirmation: 'some test')
 
