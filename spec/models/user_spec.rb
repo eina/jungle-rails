@@ -30,7 +30,13 @@ RSpec.describe User, type: :model do
       user = User.new(name: 'test', email: 'test@test.com', password: 'test', password_confirmation: nil)
 
       expect(user).to_not be_valid
-    end    
+    end
+
+    it 'should have a password with 4 or more characters' do
+      user = User.new(name: 'test', email: 'test@test.com', password: '123', password_confirmation: '123')
+
+      expect(user).to_not be_valid
+    end
 
     it 'should have the same password and password_confirmation values' do
       user = User.new(name: 'test', email: 'test@test.com', password: 'password', password_confirmation: 'password')
@@ -50,7 +56,6 @@ RSpec.describe User, type: :model do
       it 'should be invalid if email is not unique' do   
         should_not be_valid
       end
-
     end
 
   end
