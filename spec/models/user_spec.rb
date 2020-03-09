@@ -59,4 +59,27 @@ RSpec.describe User, type: :model do
     end
 
   end
+
+  describe '.authenticate_with_credentials' do
+    before do
+      login_user = User.new(name: 'trial', email: 'trial@trial.com', password: 'password', password_confirmation: 'password')
+      login_user.save
+    end
+
+    it 'should log in a valid user' do
+      user = User.authenticate_with_credentials('trial@trial.com', 'password')
+      expect(user).to_not be_nil
+    end
+
+    it 'should be invalid if there is no email present' do
+      user = User.authenticate_with_credentials(nil, 'test')
+      expect(user).to be_nil
+    end
+
+    it 'should be invalid if there is no password present' do
+      user = User.authenticate_with_credentials('test@test.com', nil)
+      expect(user).to be_nil
+    end
+  end
+
 end
