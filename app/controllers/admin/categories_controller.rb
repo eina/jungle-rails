@@ -1,5 +1,5 @@
 class Admin::CategoriesController < ApplicationController
-  # http_basic_authenticate_with name: ENV["ADMIN_USER"], password: ENV["ADMIN_PW"]
+  http_basic_authenticate_with name: ENV["ADMIN_USER"], password: ENV["ADMIN_PW"]
 
   def index
     @category = Category.all
